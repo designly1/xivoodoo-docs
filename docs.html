@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xiVoodoo - dgVoodoo2 Configuration Manager for FFXI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 64px;
+            height: 64px;
+            margin-right: 20px;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-bottom: 30px;
+        }
+
+        .donate-section {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .donate-button {
+            display: inline-block;
+            background: #2ecc71;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .donate-button:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            margin: 20px 0 10px 0;
+            font-size: 1.3rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .code-block {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .warning {
+            background: #fed7d7;
+            border: 1px solid #feb2b2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #c53030;
+        }
+
+        .info {
+            background: #bee3f8;
+            border: 1px solid #90cdf4;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #2b6cb0;
+        }
+
+        .step {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .screenshot {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .screenshot img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .logo h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="assets/icon.png" alt="xiVoodoo Icon">
+                <h1>xiVoodoo</h1>
+            </div>
+            <p class="subtitle">dgVoodoo2 Configuration Manager for Final Fantasy XI</p>
+
+            <div class="nav-links" style="margin: 20px 0;">
+                <a href="quick-start.html" class="nav-link"
+                    style="display: inline-block; background: #667eea; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 0 10px; transition: all 0.3s ease;">
+                    🚀 Quick Start Guide
+                </a>
+                <a href="navigation.html" class="nav-link"
+                    style="display: inline-block; background: #48bb78; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 0 10px; transition: all 0.3s ease;">
+                    📋 Navigation Hub
+                </a>
+            </div>
+
+            <div class="donate-section">
+                <h3>Support Development</h3>
+                <p>If you find xiVoodoo helpful, consider supporting the development!</p>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=PSWY2WZ39JPBW" target="_blank"
+                    class="donate-button">
+                    Donate via PayPal
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>What is xiVoodoo?</h2>
+                <p>xiVoodoo is a modern, user-friendly configuration manager for dgVoodoo2, specifically designed for
+                    Final Fantasy XI players. It provides an intuitive interface for managing DirectX emulation settings
+                    without the complexity of manual configuration files.</p>
+
+                <h3>Key Features</h3>
+                <ul class="feature-list">
+                    <li>One-click dgVoodoo2 installation</li>
+                    <li>Visual configuration interface</li>
+                    <li>Real-time system status monitoring</li>
+                    <li>Automatic configuration validation</li>
+                    <li>Backup and restore functionality</li>
+                    <li>GPU and monitor detection</li>
+                    <li>Modern, responsive UI</li>
+                </ul>
+
+                <div class="info">
+                    <strong>Note:</strong> xiVoodoo requires administrator privileges to install dgVoodoo2 components
+                    and modify system files.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>System Requirements</h2>
+                <ul class="feature-list">
+                    <li>Windows 10/11 (64-bit)</li>
+                    <li>DirectX 11 compatible graphics card</li>
+                    <li>Final Fantasy XI installed</li>
+                    <li>Administrator privileges</li>
+                    <li>4GB RAM minimum</li>
+                    <li>100MB free disk space</li>
+                </ul>
+
+                <div class="warning">
+                    <strong>Important:</strong> Always run xiVoodoo as administrator to ensure proper installation and
+                    configuration.
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Installation Guide</h2>
+
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Download xiVoodoo</strong>
+                    <p>Download the latest version from the releases page and run the installer as administrator.</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Set Installation Path</strong>
+                    <p>Navigate to the Installation tab and set your Final Fantasy XI installation directory. This is
+                        typically located at:</p>
+                    <div class="code-block">C:\Program Files (x86)\PlayOnline\SquareEnix\PlayOnlineViewer</div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Install dgVoodoo2</strong>
+                    <p>Click "Install dgVoodoo2" to automatically install the necessary components. The system will
+                        verify the installation and show status indicators.</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Configure Settings</strong>
+                    <p>Switch to the Configuration tab to customize dgVoodoo2 settings for optimal performance with
+                        Final Fantasy XI.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Configuration Guide</h2>
+
+                <h3>General Settings</h3>
+                <ul class="feature-list">
+                    <li><strong>dgVoodoo Watermark:</strong> Enable to show the dgVoodoo logo in-game</li>
+                    <li><strong>Force vSync:</strong> Prevents screen tearing</li>
+                    <li><strong>Keep filter if point sampled:</strong> Maintains texture filtering</li>
+                </ul>
+
+                <h3>DirectX Settings</h3>
+                <ul class="feature-list">
+                    <li><strong>Resolution:</strong> Set your desired game resolution</li>
+                    <li><strong>Fullscreen:</strong> Choose between windowed, fullscreen, or borderless</li>
+                    <li><strong>Anti-aliasing:</strong> Configure MSAA levels</li>
+                    <li><strong>Anisotropic filtering:</strong> Improve texture quality</li>
+                </ul>
+
+                <h3>Advanced Settings</h3>
+                <ul class="feature-list">
+                    <li><strong>Bilinear DD/CPU operations:</strong> Use bilinear filtering for 2D operations</li>
+                    <li><strong>Apply Phong shading:</strong> Enable smoother lighting calculations</li>
+                    <li><strong>Fast video memory access:</strong> Optimize memory access patterns</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Troubleshooting</h2>
+
+                <h3>Common Issues</h3>
+
+                <div class="warning">
+                    <strong>Application won't start:</strong>
+                    <p>Ensure you're running xiVoodoo as administrator. Right-click the shortcut and select "Run as
+                        administrator".</p>
+                </div>
+
+                <div class="warning">
+                    <strong>Installation fails:</strong>
+                    <p>Check that your antivirus isn't blocking the installation. Add xiVoodoo to your antivirus
+                        exclusions if necessary.</p>
+                </div>
+
+                <div class="warning">
+                    <strong>Game crashes:</strong>
+                    <p>Try disabling the dgVoodoo watermark and reducing anti-aliasing settings. Some configurations may
+                        not be compatible with your system.</p>
+                </div>
+
+                <h3>Verification</h3>
+                <p>Use the "Verify Installation" button to check if all components are properly installed and
+                    configured. The system status monitor will show real-time information about:</p>
+                <ul class="feature-list">
+                    <li>Directory validity</li>
+                    <li>dgVoodoo2 DLL presence</li>
+                    <li>Configuration file status</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Advanced Usage</h2>
+
+                <h3>Manual Configuration</h3>
+                <p>For advanced users, you can manually edit the dgVoodoo configuration file. It's located at:</p>
+                <div class="code-block">[FFXI Directory]\dgVoodoo.conf</div>
+
+                <h3>Backup and Restore</h3>
+                <p>xiVoodoo automatically creates backups of your configuration. You can restore previous settings using
+                    the "Reload from File" button in the Configuration tab.</p>
+
+                <h3>Performance Optimization</h3>
+                <ul class="feature-list">
+                    <li>Enable "Fast video memory access" for better performance</li>
+                    <li>Use 2x or 4x MSAA for optimal quality/performance balance</li>
+                    <li>Disable the watermark for maximum performance</li>
+                    <li>Set anisotropic filtering to 8x or 16x for best texture quality</li>
+                </ul>
+
+                <div class="info">
+                    <strong>Tip:</strong> The configuration is automatically cached and loaded on startup. Use "Clear
+                    Config Cache" to reset to defaults if needed.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #2d3748; margin-bottom: 15px;">Other Documentation</h3>
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <a href="quick-start.html"
+                        style="display: inline-block; background: #667eea; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; font-weight: 600; transition: all 0.3s ease;">
+                        🚀 Quick Start Guide
+                    </a>
+                    <a href="navigation.html"
+                        style="display: inline-block; background: #48bb78; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; font-weight: 600; transition: all 0.3s ease;">
+                        📋 Navigation Hub
+                    </a>
+                </div>
+            </div>
+            <p>&copy; 2024 Jay Simons. All rights reserved.</p>
+            <p>Website: <a href="https://xivoodoo.yaa.bz" target="_blank">https://xivoodoo.yaa.bz</a></p>
+            <p>Contact: <a href="https://yaa.bz/contact" target="_blank">https://yaa.bz/contact</a></p>
+            <p>For support and updates, visit the project repository.</p>
+        </div>
+    </div>
+</body>
+
+</html>
